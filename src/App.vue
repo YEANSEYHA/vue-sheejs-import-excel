@@ -8,6 +8,10 @@
     <div>
       {{ this.excelData }}
     </div>
+    
+    <button  v-on:click="onSubmit()">
+      Import
+    </button>
   </div>
 </template>
 
@@ -16,7 +20,8 @@ var XLSX = require('xlsx');
 export default {
   data() {
     return {
-      excelData: []
+      excelData: [],
+      validateData: []
     };
   },
   methods: {
@@ -26,16 +31,39 @@ export default {
       reader.onload = () => {
         var fileData = reader.result;
         var wb = XLSX.read(fileData, {type : 'binary'});
+        console.log(wb)
         wb.SheetNames.forEach((sheetName) => {
             /* eslint-disable */
             var rowObj =XLSX.utils.sheet_to_json(wb.Sheets[sheetName]);
             this.excelData = JSON.stringify(rowObj)
-            console.log(rowObj)
+            this.validateData = rowObj
             /* eslint-enable */
         })
       };
       reader.readAsBinaryString(input.files[0]);
+    },
+    onSubmit(){
+      let data= [];
+      data = this.validateData
+      console.log(data[0].name_kh)
+      console.log(data.length)
+
+      /* if(((typeof data[0].name_kh != "undefined") && (typeof data[0].name_kh.valueOf() == "string")) && (data[0].name_kh.legnth > 0)){
+        alert('This is a string')
+      }else{
+        alert('This is Not a string')
+      } */
+
+      
+      let pattern = /^[a-zA-Z\s]+$/;
+
+      if((data[0].name_kh).match(pattern)){
+        alert('Valid name')
+      }else{
+        alert('Invalid name')
+      }
     }
+    
   }
 };
 </script>
