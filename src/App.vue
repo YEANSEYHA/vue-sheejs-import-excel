@@ -54,14 +54,28 @@ export default {
         alert('This is Not a string')
       } */
 
-      
-      let pattern = /^[a-zA-Z\s]+$/;
+      let patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //eslint-disable-line
+      //let patternName = /^[a-zA-Z\s]+$/;
+      //let patternPhone = /^0[1-9]\d{7,8}$/;
 
-      if((data[0].name_kh).match(pattern)){
+      /* if((data[0].name_kh).match(patternName)){
         alert('Valid name')
       }else{
         alert('Invalid name')
+      } */
+
+      if((data[0].email).match(patternEmail)){
+        console.log(data[0].email+'is valid.')
+
+      }else{
+        console.log(data[0].email+'Email is invalid')
       }
+
+      /* if((data[0].phone).match(patternPhone)){
+        console.log('Valid Phonenumber')
+      }else{
+        console.log('Invalid Phonenumber')
+      } */
     }
     
   }
