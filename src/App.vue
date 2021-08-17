@@ -45,37 +45,40 @@ export default {
     onSubmit(){
       let data= [];
       data = this.validateData
-      console.log(data[0].name_kh)
-      console.log(data.length)
-
-      /* if(((typeof data[0].name_kh != "undefined") && (typeof data[0].name_kh.valueOf() == "string")) && (data[0].name_kh.legnth > 0)){
-        alert('This is a string')
-      }else{
-        alert('This is Not a string')
-      } */
-
-      let patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //eslint-disable-line
-      //let patternName = /^[a-zA-Z\s]+$/;
-      //let patternPhone = /^0[1-9]\d{7,8}$/;
-
-      /* if((data[0].name_kh).match(patternName)){
-        alert('Valid name')
-      }else{
-        alert('Invalid name')
-      } */
-
-      if((data[0].email).match(patternEmail)){
-        console.log(data[0].email+'is valid.')
-
-      }else{
-        console.log(data[0].email+'Email is invalid')
+      
+      // Validation Object
+      const patterns ={
+        name_latin:  /^[a-zA-Z\s]+$/,
+        email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, //eslint-disable-line
+        phone: /[1-9]\d{7,8}$/
       }
+      let countInvalid = 0;
 
-      /* if((data[0].phone).match(patternPhone)){
-        console.log('Valid Phonenumber')
-      }else{
-        console.log('Invalid Phonenumber')
-      } */
+      for (let i=0;i<data.length;i++){
+
+        if((data[i].name_latin.toString()).match(patterns.name_latin)){
+          console.log('Row No',i+1,'Name Latin:',data[i].name_latin,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Name Latin:',data[i].name_latin,'is invalid')
+        }
+        
+        if((data[i].phone.toString()).match(patterns.phone)){
+          console.log('Row No',i+1,'Phone:',data[i].phone,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Phone:',data[i].phone,'is invalid')
+        }
+
+        if((data[i].email.toString()).match(patterns.email)){
+          console.log('Row No',i+1,'Email:',data[i].email,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Email:',data[i].email,'is invalid')
+        }
+      }
+      console.log('Total invalid field :',countInvalid)
+      
     }
     
   }
