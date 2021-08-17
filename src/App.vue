@@ -50,7 +50,11 @@ export default {
       const patterns ={
         name_latin:  /^[a-zA-Z\s]+$/,
         email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, //eslint-disable-line
-        phone: /[1-9]\d{7,8}$/
+        phone: /[1-9]\d{7,8}$/,
+        address: /^(?!\s*$).+/, // not empty string
+        role: /^(?!\s*$).+/, // not empty string
+        gender: /^(?!\s*$).+/, // not empty string
+        birth_date:/^\d{1,2}\/\d{1,2}\/\d{4}$/
       }
       let countInvalid = 0;
 
@@ -76,6 +80,36 @@ export default {
           countInvalid++;
           console.log('Row No',i+1,'Email:',data[i].email,'is invalid')
         }
+
+        if((data[i].address.toString()).match(patterns.address)){
+          console.log('Row No',i+1,'Address:',data[i].address,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Address:',data[i].address,'is invalid')
+        }
+
+        if((data[i].role.toString()).match(patterns.role)){
+          console.log('Row No',i+1,'Role:',data[i].role,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Role:',data[i].role,'is invalid')
+        }
+
+        if((data[i].gender.toString()).match(patterns.gender)){
+          console.log('Row No',i+1,'Gender:',data[i].gender,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Gender:',data[i].gender,'is invalid')
+        }
+
+        if((data[i].birth_date.toString()).match(patterns.birth_date)){
+          console.log('Row No',i+1,'Birth Date:',data[i].birth_date,'is valid')
+        }else{
+          countInvalid++;
+          console.log('Row No',i+1,'Birth Date:',data[i].birth_date,'is invalid')
+        }
+
+
       }
       console.log('Total invalid field :',countInvalid)
       
